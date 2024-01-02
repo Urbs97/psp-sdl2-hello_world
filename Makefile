@@ -2,8 +2,12 @@ TARGET = Tutorial
 OBJS := $(patsubst src/%.cpp,src/%.o,$(wildcard src/*.cpp))
  
 CFLAGS = 
-CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti -lstdc++
+CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti
 ASFLAGS = $(CFLAGS)
+
+LIBDIR =
+LDFLAGS =
+LIBS= -lstdc++ -lpspgum -lpspgu -lm
  
 # PSP Stuff
 BUILD_PRX = 1

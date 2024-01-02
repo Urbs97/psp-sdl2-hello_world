@@ -44,5 +44,11 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "flatpak",
+        "PPSSPP",
+        "PSPSDK",
+        "thid"
+    ]
 }

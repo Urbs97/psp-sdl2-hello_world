@@ -1,6 +1,7 @@
 #include <pspctrl.h>
 #include <pspdebug.h>
 #include <pspkernel.h>
+#include <string>
 
 PSP_MODULE_INFO("Tutorial", 0, 1, 0);
 
@@ -38,6 +39,8 @@ auto main() -> int
     sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
 
     struct SceCtrlData padData;
+    std::string message = "Press X to continue...\n";
+    pspDebugScreenPrintf(message.c_str());
     while (true)
     {
         sceCtrlReadBufferPositive(&padData, 1);
