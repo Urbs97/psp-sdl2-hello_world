@@ -7,7 +7,7 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lstdc++ -lg -lGL -lpspvram -lpspaudio -lpspvfpu -lpsphprm -lpspgu -lSDL2
+LIBS= -lstdc++ -lSDL2 -lSDL2_gfx -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lg -lGL -lpspvram -lpspaudio -lpspvfpu -lpsphprm -lpspgu -lpng -lpng16 -ljpeg -lturbojpeg -lz
 
  
 # PSP Stuff

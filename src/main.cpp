@@ -1,5 +1,6 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <pspdebug.h>
 #include <pspkernel.h>
 
@@ -30,6 +31,28 @@ int SetupCallbacks(void)
     return thid;
 }
 
+SDL_Texture* LoadSprite(const char* file, SDL_Renderer* renderer)
+{
+    SDL_Surface* temp = IMG_Load(file);
+    if (!temp)
+    {
+        printf("Failed to load image: %s\n", IMG_GetError());
+        return nullptr;
+    }
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
+    SDL_FreeSurface(temp);
+    return texture;
+}
+
+void RenderSprite(SDL_Texture* sprite, SDL_Renderer* renderer, int x, int y)
+{
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    SDL_QueryTexture(sprite, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopy(renderer, sprite, NULL, &dest);
+}
+
 auto main() -> int
 {
     SDL_SetMainReady();
@@ -39,7 +62,7 @@ auto main() -> int
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    SDL_Rect square = { 216, 96, 34, 64 };
+    SDL_Texture* sprite = LoadSprite("sprites/sprite.png", renderer);
 
     int running = 1;
     SDL_Event event;
@@ -65,12 +88,13 @@ auto main() -> int
         // Clear the screen
         SDL_RenderClear(renderer);
 
-        // Draw a red square
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &square);
+        // Draw sprite
+        SDL_RenderClear(renderer);
+        RenderSprite(sprite, renderer, 100, 100); // Render at position 100, 100
+        SDL_RenderPresent(renderer);
 
-        // Draw everything on a white background
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        // Draw everything on a dark blue background
+        SDL_SetRenderDrawColor(renderer, 0, 0, 128, 255);
         SDL_RenderPresent(renderer);
     }
 
