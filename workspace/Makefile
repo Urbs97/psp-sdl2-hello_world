@@ -1,5 +1,5 @@
 TARGET = Tutorial
-OBJS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+OBJS := $(patsubst src/%.cpp,src/%.o,$(wildcard src/*.cpp))
  
 CFLAGS = 
 CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti
