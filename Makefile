@@ -1,5 +1,20 @@
-all:
-	sudo docker run -v "$(CURDIR)/workspace":/home/pspdev -w /home/pspdev pspdev/pspdev:latest make
+TARGET = Tutorial
+OBJS := $(patsubst src/%.cpp,src/%.o,$(wildcard src/*.cpp))
+ 
+CFLAGS = 
+CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti -lstdc++
+ASFLAGS = $(CFLAGS)
+ 
+# PSP Stuff
+BUILD_PRX = 1
+PSP_FW_VERSION = 500
+ 
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = Tutorial
+#PSP_EBOOT_ICON = ICON0.PNG 
+ 
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
 
-clean:
-	rm -f workspace/src/*.o workspace/*.elf workspace/*.prx workspace/*.PBP
+run: all
+	flatpak run org.ppsspp.PPSSPP $(CURDIR)/EBOOT.PBP
