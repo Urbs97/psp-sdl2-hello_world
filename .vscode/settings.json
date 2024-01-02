@@ -46,9 +46,15 @@
         "typeinfo": "cpp"
     },
     "cSpell.words": [
+        "cbutton",
+        "cdevice",
+        "CONTROLLERBUTTONDOWN",
+        "CONTROLLERDEVICEADDED",
         "flatpak",
+        "GAMECONTROLLER",
         "PPSSPP",
         "PSPSDK",
-        "thid"
+        "thid",
+        "WINDOWPOS"
     ]
 }

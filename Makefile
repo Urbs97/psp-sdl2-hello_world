@@ -7,7 +7,8 @@ ASFLAGS = $(CFLAGS)
 
 LIBDIR =
 LDFLAGS =
-LIBS= -lstdc++ -lpspgum -lpspgu -lm
+LIBS= -lstdc++ -lg -lGL -lpspvram -lpspaudio -lpspvfpu -lpsphprm -lpspgu -lSDL2
+
  
 # PSP Stuff
 BUILD_PRX = 1
