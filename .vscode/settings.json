@@ -53,6 +53,7 @@
         "flatpak",
         "GAMECONTROLLER",
         "PPSSPP",
+        "PRESENTVSYNC",
         "PSPSDK",
         "thid",
         "WINDOWPOS"

@@ -33,14 +33,15 @@ int SetupCallbacks(void)
 
 SDL_Texture* LoadSprite(const char* file, SDL_Renderer* renderer)
 {
-    SDL_Surface* temp = IMG_Load(file);
-    if (!temp)
+    SDL_Texture* texture = IMG_LoadTexture(renderer, file);
+    if (texture == nullptr)
     {
-        printf("Failed to load image: %s\n", IMG_GetError());
+        pspDebugScreenPrintf("Failed to create texture: %s\n", SDL_GetError());
+        sceKernelDelayThread(3 * 1000 * 1000);
         return nullptr;
     }
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
-    SDL_FreeSurface(temp);
+    pspDebugScreenPrintf("Loaded image: %s\n", file);
+    sceKernelDelayThread(3 * 1000 * 1000);
     return texture;
 }
 
@@ -55,17 +56,23 @@ void RenderSprite(SDL_Texture* sprite, SDL_Renderer* renderer, int x, int y)
 
 auto main() -> int
 {
+    SetupCallbacks();
     SDL_SetMainReady();
+    pspDebugScreenInit();
+
+    pspDebugScreenPrintf("Launching...\n");
+
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER);
 
     SDL_Window* window = SDL_CreateWindow("window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 480, 272, 0);
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     SDL_Texture* sprite = LoadSprite("sprites/sprite.png", renderer);
 
-    int running = 1;
     SDL_Event event;
+    bool renderSprite = false;
+    bool running = true;
     while (running)
     {
         if (SDL_PollEvent(&event))
@@ -73,14 +80,16 @@ auto main() -> int
             switch (event.type)
             {
             case SDL_QUIT:
-                running = 0;
+                running = false;
                 break;
             case SDL_CONTROLLERDEVICEADDED:
                 SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN:
                 if (event.cbutton.button == SDL_CONTROLLER_BUTTON_START)
-                    running = 0;
+                    running = false;
+                if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A)
+                    renderSprite = true;
                 break;
             }
         }
@@ -88,13 +97,16 @@ auto main() -> int
         // Clear the screen
         SDL_RenderClear(renderer);
 
-        // Draw sprite
-        SDL_RenderClear(renderer);
-        RenderSprite(sprite, renderer, 100, 100); // Render at position 100, 100
-        SDL_RenderPresent(renderer);
-
         // Draw everything on a dark blue background
         SDL_SetRenderDrawColor(renderer, 0, 0, 128, 255);
+
+        // Draw sprite
+        if (renderSprite && sprite != nullptr)
+        {
+            RenderSprite(sprite, renderer, 100, 100); // Render at position 100, 100
+        }
+
+        // Present changes
         SDL_RenderPresent(renderer);
     }
 
