@@ -111,5 +111,6 @@ auto main() -> int
         SDL_RenderPresent(renderer);
     }
 
+    SDL_Quit();
     return 0;
 }
