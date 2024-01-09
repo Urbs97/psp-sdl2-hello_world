@@ -52,6 +52,7 @@
         "CONTROLLERDEVICEADDED",
         "flatpak",
         "GAMECONTROLLER",
+        "libsdl",
         "PPSSPP",
         "PRESENTVSYNC",
         "PSPSDK",

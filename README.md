@@ -1,30 +1,30 @@
-# PSP-HelloWorld
+# PSP Example Collection
 
-## How to Build
-Install [PSPSDK](https://github.com/pspdev/pspdev).  
-Use make to build:
-- make
-- make rebuild
-- make clean
+This repository is a collection of examples demonstrating the use of various libraries on the PlayStation Portable (PSP). It serves as a practical resource for developers looking to explore PSP development.
 
-## How to Debug on Real Hardware
-Build using `make debug`.  
-Then use [PSPLink](http://pspdev.github.io/psplinkusb/) to send your homebrew to your psp while it's being monitored on your computer.  
-You will be able to see exceptions and thanks to the debug build you will also be able to find the source file + line of where the exception occurred using `psp-addr2line`.  
-You might also need to compile SDL2 from source as debug incase the libSDL2d is missing.
+## Prerequisites
 
-## SDL2
-https://wiki.libsdl.org/SDL2/README/psp  
-https://github.com/libsdl-org/SDL/tree/SDL2
+Before diving into the examples, ensure you have the following installed:
+
+- **PSPSDK**: Essential for PSP development. Install it from [here](https://github.com/pspdev/pspdev).
+- **PSPLink**: A useful tool for debugging. More information and download available at [PSPLink's website](http://pspdev.github.io/psplinkusb/).
 
 ## PSPSDK Documentation
-https://pspdev.github.io/pspsdk/
 
-## How to get Includes in VSCode
-Set the following lines in the include path:
-```
+For detailed documentation and additional resources on PSPSDK, visit [pspdev.github.io/pspsdk/](https://pspdev.github.io/pspsdk/).
+
+## Setting Up Includes in VSCode
+
+To properly configure your Visual Studio Code environment, add these lines to your include path:
+
+```plaintext
 ${workspaceFolder}/**
 ${PSPDEV}/include
 ${PSPDEV}/psp/include
 ${PSPDEV}/psp/sdk/include
 ```
+This setup ensures that the IDE correctly locates all necessary headers and libraries for PSP development.
+
+## How To Contribute
+Contributions are welcome! If you have an example that you'd like to share or improvements to existing examples, please feel free to:  
+Open a Pull Request: Submit your example or modifications. Ensure your code is documented and follows the existing structure for consistency.
