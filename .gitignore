@@ -8,3 +8,9 @@
 *.prx
 
 *.SFO
+
+*.d
+
+*.a
+
+examples/sdl2-imgui/imgui.ini

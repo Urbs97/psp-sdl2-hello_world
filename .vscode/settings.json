@@ -53,6 +53,7 @@
         "flatpak",
         "GAMECONTROLLER",
         "libsdl",
+        "pico",
         "PPSSPP",
         "PRESENTVSYNC",
         "PSPSDK",
